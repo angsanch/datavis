@@ -1,35 +1,8 @@
 import json
 
+import extrapolator
 import humdata
 import continents
-
-def extr_lat(data:list, divisions:list) -> float:
-	lats = [i["lat"] for i in data if i["name"] in divisions and i["lat"] != None]
-	if len(lats) == 0:
-		return None
-	return sum(lats) / len(lats)
-
-def extr_lon(data:list, divisions:list) -> float:
-	lons = [i["lon"] for i in data if i["name"] in divisions and i["lon"] != None]
-	if len(lons) == 0:
-		return None
-	return sum(lons) / len(lons)
-
-def extr_data(data:list, divisions:list) -> list:
-	return {"date": [], "positive": [], "dead": [], "recovered": []}
-
-def extr_all(data:list, reg:dict) -> None:
-	for i in reg["divisions"]:
-		extr_all(data, [j for j in data if j["name"] == i][0])
-
-	if reg["lat"] == None:
-		reg["lat"] = extr_lat(data, reg["divisions"])
-	if reg["lon"] == None:
-		reg["lon"] = extr_lon(data, reg["divisions"])
-	if len(reg["data"]) == 0:
-		if len(reg["divisions"]) == 0:
-			raise ValueError(f"No data and no divisions to extrapolate it on {reg['name']}")
-		reg["data"] = extr_data(data, reg["divisions"])
 
 def post_process(data:list) -> list:
 	childs = []
@@ -39,7 +12,7 @@ def post_process(data:list) -> list:
 	for i in data:
 		i["orphan"] = not i["name"] in childs
 		if i["orphan"]:
-			extr_all(data, i)
+			extrapolator.extr_all(data, i)
 	for i in data:
 		i["data"]["date"] = [j.strftime("%Y-%m-%d") for j in i["data"]["date"]]
 	return data
