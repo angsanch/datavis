@@ -1,0 +1,34 @@
+/* global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @apply font-sans bg-[#242424] leading-6 font-normal antialiased;
+}
+
+a {
+  @apply font-medium text-[#646cff] no-underline;
+}
+
+/*a:hover {
+  @apply text-[#535bf2];
+}*/
+
+body {
+  @apply flex items-start min-w-[320px] min-h-screen m-0 text-white;
+}
+
+h1 {
+  @apply text-[3.2em] leading-[1.1];
+}
+
+.arrow-button {
+  @apply rounded-lg border px-4 py-2 text-lg font-medium bg-[#1a1a1a] cursor-pointer transition;
+}
+.arrow-button:hover {
+  @apply border-[#646cff];
+}
+.arrow-button:focus {
+  @apply outline-none ring-4 ring-offset-2;
+}
