@@ -1,6 +1,30 @@
 var parser = require("../tools/parser");
 var server;
 
+/**
+ * @swagger
+ * /regionInfo:
+ *   get:
+ *     summary: Retrieve region information
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         schema:
+ *           oneOf:
+ *             - type: string
+ *               example: 'ESP'
+ *             - type: array
+ *               items:
+ *                 type: string
+ *               example: ["ESP", "FRA"]
+ *         description: A JSON-formatted ID or an array of IDs representing regions (e.g., `id=ESP` or `id=["ESP","FRA"]`).
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved region information
+ *       400:
+ *         description: Invalid format or missing parameter
+ */
 
 function getRegions(ids)
 {

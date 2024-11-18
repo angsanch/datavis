@@ -1,6 +1,26 @@
 var parser = require("../tools/parser");
 var server;
 
+/**
+ * @swagger
+ * /regions:
+ *   get:
+ *     summary: Retrieve regions id
+ *     parameters:
+ *       - in: query
+ *         name: onlyOrphans
+ *         required: false
+ *         schema:
+ *           type: boolean
+ *           example: true
+ *         description: Boolean value, true will only send orphan regions and false will send everything.
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved region information
+ *       400:
+ *         description: Invalid format
+ */
+
 function regions(req, res, next)
 {
 	var orph;
@@ -10,7 +30,7 @@ function regions(req, res, next)
 		orph = false;
 	else
 		orph = parser.bool(req.query.onlyOrphans);
-	if (typeof orph != "string")
+	if (typeof orph !== "boolean")
 		return res.status(400).send({msg: "Invalid parameter"});
 
 	names = server.data.filter((i) => {

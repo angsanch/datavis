@@ -6,6 +6,13 @@ const port = 8000;
 app.use(body.json());
 app.use(body.urlencoded({extended: true}));
 
+//Swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerOptions = require('../swaggerOptions');
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 require("./routes/getData")(app);
 require("./routes/regionInfo")(app);
 require("./routes/regions")(app);
