@@ -14,6 +14,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 require("./routes/getData")(app);
+require("./routes/combinedData")(app);
 require("./routes/regionInfo")(app);
 require("./routes/regions")(app);
 

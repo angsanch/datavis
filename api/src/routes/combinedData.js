@@ -3,9 +3,9 @@ var server;
 
 /**
  * @swagger
- * /getData:
+ * /combinedData:
  *   get:
- *     summary: Retrieve region historic charts
+ *     summary: Retrieve several regions historic charts and combine them
  *     parameters:
  *       - in: query
  *         name: id
@@ -65,7 +65,8 @@ var server;
  *         description: Invalid format or missing parameter.
  */
 
-function getData(req, res, next)
+
+function combinedData(req, res, next)
 {
 	let args = worker.getParameters(req.query);
 	let regions;
@@ -87,8 +88,8 @@ function getData(req, res, next)
 function add(app)
 {
 	server = app;
-	app.get("/getData", (req, res, next) => {
-		getData(req, res, next);
+	app.get("/combinedData", (req, res, next) => {
+		combinedData(req, res, next);
 	});
 }
 
