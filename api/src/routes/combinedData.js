@@ -65,12 +65,60 @@ var server;
  *         description: Invalid format or missing parameter.
  */
 
+function sum(arr)
+{
+	let total = 0;
+
+	arr.forEach((i) => {
+		total += i;
+	});
+	return (total);
+}
+
+function getDate(region, date)
+{
+	let older = region.filter(i => {
+		return (new Date(i.date) <= date);
+	});
+	if (older.length === 0)
+		return (region[0]);
+	else
+		return (older[older.length - 1]);
+}
+
+function createCombinedDate(data, date)
+{
+	let result = {};
+	let pos = [];
+	let dead = [];
+	let rec = [];
+
+	result["date"] = date;
+	date = new Date(date);
+	Object.keys(data).forEach((i) => {
+		day = getDate(data[i], date);
+		if (day.positive !== undefined)
+			pos.push(day.positive);
+		if (day.dead !== undefined)
+			dead.push(day.dead);
+		if (day.recovered !== undefined)
+			rec.push(day.recovered);
+	});
+	if (pos.length !== 0)
+		result["positive"] = sum(pos);
+	if (dead.length !== 0)
+		result["dead"] = sum(dead);
+	if (rec.length !== 0)
+		result["recovered"] = sum(rec);
+	return (result);
+}
 
 function combinedData(req, res, next)
 {
 	let args = worker.getParameters(req.query);
 	let regions;
-	let result;
+	let data = {};
+	let result = [];
 
 	for (const [arg, value] of Object.entries(args)) {
 		if (value === null)
@@ -78,9 +126,18 @@ function combinedData(req, res, next)
 	}
 	regions = server.data.filter(i => args.id.includes(i["name"]));
 	delete args.id;
-	result = {};
 	regions.forEach(element => {
-		result[element["name"]] = worker.getRegions(args, element["data"])
+		data[element["name"]] = worker.getRegions(args, element["data"])
+	});
+	Object.keys(data).forEach((i) => {
+		data[i].forEach((j) => {
+			result.push(j.date);
+		});
+	});
+	result = [...new Set(result)];
+	result.sort();
+	result = result.map(i => {
+		return (createCombinedDate(data, i));
 	});
 	res.status(200).send(result);
 }
