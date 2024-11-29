@@ -3,7 +3,7 @@ var server;
 
 /**
  * @swagger
- * /regionInfo:
+ * /api/regionInfo:
  *   get:
  *     summary: Retrieve region information
  *     parameters:

@@ -3,7 +3,7 @@ var server;
 
 /**
  * @swagger
- * /combinedData:
+ * /api/combinedData:
  *   get:
  *     summary: Retrieve several regions historic charts and combine them
  *     parameters:

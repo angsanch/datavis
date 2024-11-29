@@ -3,7 +3,7 @@ var server;
 
 /**
  * @swagger
- * /regions:
+ * /api/regions:
  *   get:
  *     summary: Retrieve regions id
  *     parameters:

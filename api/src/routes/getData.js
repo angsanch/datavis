@@ -3,7 +3,7 @@ var server;
 
 /**
  * @swagger
- * /getData:
+ * /api/getData:
  *   get:
  *     summary: Retrieve region historic charts
  *     parameters:

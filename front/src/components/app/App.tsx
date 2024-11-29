@@ -1,12 +1,15 @@
+import SlidingBar from "./SlidingBar";
 import SlidingMenu from "./SlidingMenu";
 import Window from "./Window";
-import { useState } from 'react';
+import setDatesApi from "./setDatesApi";
+import { useState, useEffect } from 'react';
 
 let key = 0;
 function App()
 {
   const [windows, setWindows] = useState<React.ReactElement[]>([]);
-
+  const [dates, setDates] = useState<string[]>([]);
+  const [date, setDate] = useState<string>("");
 
 
   const addWindow = (children:React.ReactElement) => {
@@ -33,10 +36,18 @@ function App()
     });
   };
 
+  useEffect(() => {
+    console.log("api");
+    setDatesApi(setDates);
+  }, []);
+
   return (
     <>
-      <h1>*map*</h1>
       {windows}
+      <div className="fixed bottom-0 left-0 w-full">
+        <SlidingBar setDate={setDate} items={dates}/>
+      </div>
+      <a>{date}</a>
       <SlidingMenu addWindow={addWindow} />
     </>
   );
