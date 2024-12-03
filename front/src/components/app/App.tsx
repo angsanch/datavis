@@ -43,7 +43,9 @@ function App()
 
   return (
     <>
-      {windows}
+      <div className="w-full" style={{height: "calc(100vh - 100px)"}}>
+        {windows}
+      </div>
       <div className="fixed bottom-0 left-0 w-full">
         <SlidingBar setDate={setDate} items={dates}/>
       </div>

@@ -8,6 +8,7 @@ interface SlidingBarProps {
 const SlidingBar: React.FC<SlidingBarProps> = ({ items, setDate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [mouseBar, setMouseBar] = useState(false);
   const barRef = useRef<HTMLDivElement | null>(null);
 
   const handleDrag = (e: React.MouseEvent) => {
@@ -25,18 +26,12 @@ const SlidingBar: React.FC<SlidingBarProps> = ({ items, setDate }) => {
     setDate(items[newIndex]);
   };
 
-  const handleClick = (e: React.MouseEvent) => {
-    handleDrag(e);
-  };
-
   return (
-    <div className="w-full p-[20px] bg-black">
-      <div
-        ref={barRef}
-        className="w-full h-[25px] bg-[#e0e0e0] cursor-col-resize relative"
-        onMouseDown={handleClick}
-        onMouseMove={(e) => e.buttons === 1 && handleDrag(e)}
-      >
+    <div className="w-full p-[20px] bg-[#000000]"
+    onMouseDown={() => setMouseBar(true)}
+    onMouseUp={() => setMouseBar(false)}
+    onMouseMove={(e) => mouseBar && handleDrag(e)}>
+      <div ref={barRef} className="w-full h-[25px] bg-[#e0e0e0] cursor-col-resize relative">
         <div
           className="h-full absolute bg-[#007bff] top-0 left-0"
           style={{
@@ -44,9 +39,7 @@ const SlidingBar: React.FC<SlidingBarProps> = ({ items, setDate }) => {
           }}
         ></div>
       </div>
-      <div
-        className="text-center text-base mt-[10px]"
-      >
+      <div className="text-center text-base mt-[10px]">
         {items[currentIndex]}
       </div>
     </div>

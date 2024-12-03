@@ -19,20 +19,22 @@ const SlidingMenu: React.FC<SlidingMenuProps> = ({addWindow}) => {
           <img src="/favicon.svg" className="object-contain h-[100px] w-[100px]" />
         </a>
         <div className="h-[50px]"></div>
-        <button
-        className="p-[20px]"
-        onClick={() => addWindow(<Map />)}
-        >
-          new map
-        </button>
-        <button
-        className="p-[25px]"
-        onClick={() => addWindow(<img src="/graph.jpg" />)}
-        >
-          new graph
-        </button>
-        <br></br>
-        <a>hello</a>
+        <div className="menu_buttons">
+          <button
+          className="p-[20px]"
+          onClick={() => addWindow(<Map />)}
+          >
+            new map
+          </button>
+          <button
+          className="p-[25px]"
+          onClick={() => addWindow(<img src="/graph.jpg" />)}
+          >
+            new graph
+          </button>
+          <br></br>
+          <a>hello</a>
+        </div>
       </div>
       <button onClick={toggleMenu} className="arrow-button">
         {isOpen ? '<' : '>'}

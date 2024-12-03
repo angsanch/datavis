@@ -22,7 +22,7 @@ const Window: React.FC<WindowProps> = ({children, id, removeWindow, frontWindow}
     <Rnd
     minWidth={100}
     minHeight={100}
-    bounds="window"
+    bounds="parent"
     className="text-white flex items-center justify-center border bg-black"
     disableDragging={!isDraggable}
     onDragStart={() => {frontWindow(id)}}

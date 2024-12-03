@@ -11,12 +11,12 @@ a {
   @apply font-medium text-[#646cff] no-underline;
 }
 
-/*a:hover {
+button:hover {
   @apply text-[#535bf2];
-}*/
+}
 
 body {
-  @apply flex items-start min-w-[320px] min-h-screen m-0 text-white;
+  @apply text-white overflow-x-hidden;
 }
 
 h1 {
