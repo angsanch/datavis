@@ -6,9 +6,10 @@ interface WindowProps {
   id:number,
   removeWindow: (id: number) => void,
   frontWindow: (id: number) => void,
+  bg?:string,
 }
 
-const Window: React.FC<WindowProps> = ({children, id, removeWindow, frontWindow}) => {
+const Window: React.FC<WindowProps> = ({children, id, removeWindow, frontWindow, bg}) => {
   const [isDraggable, setDraggable] = useState(false);
 
   const dragMEnter = () => {
@@ -17,6 +18,9 @@ const Window: React.FC<WindowProps> = ({children, id, removeWindow, frontWindow}
   const dragMLeave = () => {
     setDraggable(false);
   };
+
+  if (bg === undefined)
+    bg = "black";
 
   return (
     <Rnd
@@ -37,7 +41,7 @@ const Window: React.FC<WindowProps> = ({children, id, removeWindow, frontWindow}
           <img src="https://www.svgrepo.com/download/12848/x-symbol.svg" />
         </button>
       </div>
-      <div className="flex-1 w-full overflow-auto" style={{height: "calc(100% - 25px)"}}>
+      <div className={`flex-1 relative w-full overflow-auto`} style={{height: "calc(100% - 25px)", background: bg}}>
           {children}
       </div>
   </Rnd>

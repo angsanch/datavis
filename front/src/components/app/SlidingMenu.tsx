@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Map from './Map';
+import Graph from './Graph';
 import './SlidingMenu.css';
 
 interface SlidingMenuProps {
-  addWindow: (children: React.ReactElement) => void,
+  addWindow: (children: React.ReactElement, bg?: string) => void,
 }
 
 const SlidingMenu: React.FC<SlidingMenuProps> = ({addWindow}) => {
@@ -28,7 +29,7 @@ const SlidingMenu: React.FC<SlidingMenuProps> = ({addWindow}) => {
           </button>
           <button
           className="p-[25px]"
-          onClick={() => addWindow(<img src="/graph.jpg" />)}
+          onClick={() => addWindow(<Graph data={{"dates": ["2020-01-01", "2020-01-02", "2020-01-03", "2020-01-04", "2020-01-05", "2020-01-06"], "active": [4, 5, 6, 7, 8, 9, 10], "recovered":[3, 4, 5, 6, 7, 8, 9], "dead":[1, 1, 1, 1, 1, 1, 1]}}></Graph>, "white")}
           >
             new graph
           </button>

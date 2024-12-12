@@ -1,48 +1,17 @@
-import React, { useRef, useEffect, useState, MutableRefObject } from "react";
+import React, { useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import Resizer from "./Resizer";
 import "leaflet/dist/leaflet.css";
-
-type Size = {
-  width?: number;
-  height?: number;
-};
-
-function useSize(ref: MutableRefObject<HTMLElement | null>): Size {
-  const [size, setSize] = useState<Size>({});
-
-  useEffect(() => {
-    if (ref.current == null) return;
-    const observer = new ResizeObserver(([entry]) => setSize(entry.contentRect));
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [ref]);
-
-  return size;
-}
-
-type ResizerProps = {
-  mapRef: MutableRefObject<HTMLElement | null>;
-};
-
-const Resizer: React.FC<ResizerProps> = ({ mapRef }) => {
-  const map = useMap();
-  const { width, height } = useSize(mapRef);
-
-  useEffect(() => {
-    console.log(width, height);
-    if (map) {
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 100);
-    }
-  }, [map, height, width]);
-
-  return null;
-};
 
 const Map: React.FC = () => {
   const position: [number, number] = [0, 0]; // Replace with desired coordinates
   const mapRef = useRef<HTMLDivElement | null>(null);
+
+  const resize = (width:number, height:number, ref:any) => {
+    console.log(ref);
+    if (ref)
+      ref.invalidateSize();
+  };
 
   return (
     <div ref={mapRef} className="w-full h-full">
@@ -56,7 +25,7 @@ const Map: React.FC = () => {
             A sample popup with some information.
           </Popup>
         </Marker>
-        <Resizer mapRef={mapRef} />
+        <Resizer extRef={mapRef} func={resize} refGetter={useMap}/>
       </MapContainer>
     </div>
   );

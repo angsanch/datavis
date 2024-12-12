@@ -12,8 +12,8 @@ function App()
   const [date, setDate] = useState<string>("");
 
 
-  const addWindow = (children:React.ReactElement) => {
-    setWindows([...windows, <Window key={key.toString()} id={key} removeWindow={removeWindow} frontWindow={frontWindow}>
+  const addWindow = (children:React.ReactElement, bg?:string) => {
+    setWindows([...windows, <Window key={key.toString()} id={key} removeWindow={removeWindow} frontWindow={frontWindow} bg={bg}>
       {children}
     </Window>]);
     key ++;
@@ -37,7 +37,6 @@ function App()
   };
 
   useEffect(() => {
-    console.log("api");
     setDatesApi(setDates);
   }, []);
 
