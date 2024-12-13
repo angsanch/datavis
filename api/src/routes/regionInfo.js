@@ -39,8 +39,8 @@ function regionInfo(req, res, next)
 	if (ids == null)
 		return (res.status(400).send({msg: "Invalid parameter"}));
 	return (res.status(200).send({data: getRegions(ids).map((i) => {
-		delete i.data;
-		return (i);
+		let { data, ...res} = i;
+		return (res);
 	})}));
 }
 
