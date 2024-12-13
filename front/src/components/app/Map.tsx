@@ -15,7 +15,7 @@ const Map: React.FC = () => {
 
   return (
     <div ref={mapRef} className="w-full h-full">
-      <MapContainer className="w-full h-full min-h-[100px]" center={position} zoom={1} maxZoom={5} minZoom={1}>
+      <MapContainer className="w-full h-full min-h-[200px]" center={position} zoom={1} maxZoom={5} minZoom={1}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

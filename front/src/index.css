@@ -12,7 +12,7 @@ a {
 }
 
 button:hover {
-  @apply text-[#535bf2];
+  @apply text-[#535bf2] border-white;
 }
 
 body {

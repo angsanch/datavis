@@ -24,8 +24,8 @@ const Window: React.FC<WindowProps> = ({children, id, removeWindow, frontWindow,
 
   return (
     <Rnd
-    minWidth={100}
-    minHeight={100}
+    minWidth={500}
+    minHeight={250}
     bounds="parent"
     className="text-white flex items-center justify-center border bg-black"
     disableDragging={!isDraggable}

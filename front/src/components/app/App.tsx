@@ -1,9 +1,10 @@
 import SlidingBar from "./SlidingBar";
 import SlidingMenu from "./SlidingMenu";
 import Window from "./Window";
-import setDatesApi from "./setDatesApi";
+import Api from "../../api/manager";
 import { useState, useEffect } from 'react';
 
+const api = new Api();
 let key = 0;
 function App()
 {
@@ -37,7 +38,7 @@ function App()
   };
 
   useEffect(() => {
-    setDatesApi(setDates);
+    api.getDates().then((dates:string[]) => setDates(dates));
   }, []);
 
   return (
@@ -45,10 +46,10 @@ function App()
       <div className="w-full" style={{height: "calc(100vh - 100px)"}}>
         {windows}
       </div>
+      <a className="absolute top-0">{date}</a>
       <div className="fixed bottom-0 left-0 w-full">
         <SlidingBar setDate={setDate} items={dates}/>
       </div>
-      <a>{date}</a>
       <SlidingMenu addWindow={addWindow} />
     </>
   );

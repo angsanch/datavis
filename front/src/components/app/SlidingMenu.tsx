@@ -29,7 +29,12 @@ const SlidingMenu: React.FC<SlidingMenuProps> = ({addWindow}) => {
           </button>
           <button
           className="p-[25px]"
-          onClick={() => addWindow(<Graph data={{"dates": ["2020-01-01", "2020-01-02", "2020-01-03", "2020-01-04", "2020-01-05", "2020-01-06"], "active": [4, 5, 6, 7, 8, 9, 10], "recovered":[3, 4, 5, 6, 7, 8, 9], "dead":[1, 1, 1, 1, 1, 1, 1]}}></Graph>, "white")}
+          onClick={() => addWindow(<Graph data={{
+            dates: ["2020-01-01", "2020-01-02", "2020-01-03", "2020-01-04", "2020-01-05", "2020-01-06"],
+            active: [4, 5, 6, 7, 8, 50],
+            recovered: [-3, 4, 5, 6, 7, 8],
+            dead: [1, 1, 1, 1, 1, 1],
+          }}></Graph>, "#aaa")}
           >
             new graph
           </button>
